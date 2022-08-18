@@ -1,0 +1,67 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}All Cafe{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <h1>All Cafes</h1>
+
+            <hr>
+
+            <table class="table table-striped w-auto th-lg">
+                <thead>
+
+                <tr>
+                    <th>name</th>
+                    <th>Map URL</th>
+                    <th style="width: 50%">Image URL</th>
+                    <th>Location</th>
+                    <th>Has Sockets</th>
+                    <th>Has Toilet</th>
+                    <th>Has Wifi</th>
+                    <th>Can Take Calls</th>
+                    <th>Seats</th>
+                    <th>Coffee Price</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+
+                </tr>
+
+                </thead>
+                <tbody>
+                {% for cafe in all_cafes %}
+                <tr>
+                    <td>{{ cafe.name }}</td>
+                    <td>{{ cafe.map_url }}</td>
+                    <td>{{ cafe.img_url }}</td>
+                    <td>{{ cafe.location }}</td>
+                    <td>{{ cafe.has_sockets }}</td>
+                    <td>{{ cafe.has_toilet }}</td>
+                    <td>{{ cafe.has_wifi }}</td>
+                    <td>{{ cafe.can_take_calls }}</td>
+                    <td>{{ cafe.seats }}</td>
+                    <td>{{ cafe.coffee_price }}</td>
+                    <td><a href="{{ url_for('update_cafe', cafe_id=cafe.id) }}">Update</a></td>
+                    <td><a href="{{ url_for('delete_cafe', cafe_id=cafe.id) }}">Delete</a></td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <p><a href="{{ url_for('home') }}">Return to index page</a></p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
